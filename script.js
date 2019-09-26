@@ -21,18 +21,12 @@ const setting = {
   traffic: 3  
 };
 
-const cars = {
-    1: 'url(./image/enemy.png)',
-    2: 'url(./image/enemy2.png)',
-    3: 'url(./image/player.png)'
-};
-
 start.addEventListener('click', startGame);
 document.addEventListener('keydown', startRun);
 document.addEventListener('keyup', stopRun);
 
 function getQuantityElements(heightElement) {
-    return document.documentElement.clientHeight / heightElement + 1;
+    return Math.ceil(gameArea.offsetHeight / heightElement);
 }
 
 function startGame() {
@@ -50,7 +44,7 @@ function startGame() {
     gameArea.innerHTML = '';
     car.style.cssText = 'left: 125px; bottom: 10px;';
 
-    for (let i = 0; i < getQuantityElements(100); i++) {
+    for (let i = 0; i < getQuantityElements(100) + 1; i++) {
         const line = document.createElement('div');
         line.classList.add('line');
         line.style.top = (i * 100) + 'px';
@@ -64,8 +58,8 @@ function startGame() {
         enemy.y = -100 * setting.traffic * (i + 1);
         enemy.style.left = Math.floor(Math.random() * (gameArea.offsetWidth - 50)) + 'px';
         enemy.style.top = enemy.y + 'px';
-        let rndCar = Math.round(Math.random() * 4) - 1;
-        enemy.style.background = "transparent " + cars[rndCar] + " center / cover no-repeat";
+        let enemyImg = Math.round(Math.random() * 2) + 1;
+        enemy.style.background = `transparent url(./image/enemy${enemyImg}.png) center / cover no-repeat`;
         gameArea.appendChild(enemy);
     }
 
@@ -148,8 +142,6 @@ function moveEnemy() {
         element.y += setting.speed / 1.5;
         element.style.top = element.y;
         if(element.y >= document.documentElement.clientHeight){
-            let rndCar = Math.floor(Math.random() * 4) - 1;
-            element.style.background = "transparent " + cars[rndCar] + " center / cover no-repeat";
             element.style.left = Math.round(Math.random() * (gameArea.offsetWidth - 50)) + 'px';
             element.y = -100 * setting.traffic;
         }
@@ -168,13 +160,13 @@ var stopAudio = new Audio();
 function startMusic() {
     stopAudio.pause();
 
-    startAudio.src = './sound/Start.mp3'; // Указываем путь к звуку "клика"
-    startAudio.autoplay = true; // Автоматически запускаем
+    startAudio.src = './sound/Start.mp3'; 
+    startAudio.play(); 
 }
 
 function stopMusic() {
     stopAudio.src = './sound/Stop.mp3';
-    stopAudio.autoplay = true;
+    stopAudio.play();
 
     startAudio.pause();
 }

@@ -1,0 +1,25 @@
+{
+  "name": "testgamejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/everett745/-.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/everett745/-/issues"
+  },
+  "homepage": "https://github.com/everett745/-#readme",
+  "devDependencies": {
+    "electron": "^6.0.10",
+    "electron-packager": "^14.0.6",
+    "path": "^0.12.7",
+    "url": "^0.11.0"
+  }
+}
